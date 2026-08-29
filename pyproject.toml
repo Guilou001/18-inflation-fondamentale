@@ -1,0 +1,44 @@
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[project]
+name = "infc"
+version = "0.1.0"
+description = "L'inflation fondamentale canadienne : le concours de Lao-Steyn rejoué à travers le choc de 2021-23, et IPC-tronq/IPC-méd reconstruits depuis les 55 composantes, écart mesuré à la mesure officielle."
+readme = "README.md"
+license = { file = "LICENSE" }
+authors = [{ name = "Guillaume Vaudescal" }]
+requires-python = ">=3.12,<3.13"
+dependencies = [
+  "numpy>=1.26",
+  "pandas>=2.2",
+  "statsmodels>=0.14",
+  "matplotlib>=3.9",
+  "typer>=0.12",
+  "requests>=2.32",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.6"]
+
+[project.scripts]
+infc = "infc.cli:app"
+
+[project.urls]
+Repository = "https://github.com/Guilou001/18-inflation-fondamentale"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/infc"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+ignore = ["E501", "B008"]

@@ -1,0 +1,67 @@
+"""Les 55 composantes des mesures d'inflation fondamentale de la Banque du Canada.
+
+Liste recopiée de la table A1 de la documentation officielle de Statistique Canada
+(« Consumer Price Index: The Bank of Canada's Preferred Measures of Core Inflation
+Methodology Document », programme 2301, rapporté). Les noms correspondent aux « Products
+and product groups » de la table 18-10-0004 ; le chargeur ÉCHOUE si une seule composante
+manque, plutôt que de continuer avec un panier incomplet.
+"""
+
+COMPOSANTES_55 = [
+    "Meat",
+    "Fish, seafood and other marine products",
+    "Dairy products and eggs",
+    "Bakery and cereal products (excluding baby food)",
+    "Fruit, fruit preparations and nuts",
+    "Vegetables and vegetable preparations",
+    "Other food products and non-alcoholic beverages",
+    "Food purchased from restaurants",
+    "Rented accommodation",
+    "Mortgage interest cost",
+    "Homeowners' replacement cost",
+    "Property taxes and other special charges",
+    "Homeowners' home and mortgage insurance",
+    "Homeowners' maintenance and repairs",
+    "Other owned accommodation expenses",
+    "Electricity",
+    "Water",
+    "Natural gas",
+    "Fuel oil and other fuels",
+    "Communications",
+    "Child care and housekeeping services",
+    "Household cleaning products",
+    "Paper, plastic and aluminum foil supplies",
+    "Other household goods and services",
+    "Furniture",
+    "Household textiles",
+    "Household equipment",
+    "Services related to household furnishings and equipment",
+    "Clothing",
+    "Footwear",
+    "Clothing accessories, watches and jewellery",
+    "Clothing material, notions and services",
+    "Purchase of passenger vehicles",
+    "Leasing of passenger vehicles",
+    "Rental of passenger vehicles",
+    "Gasoline",
+    "Passenger vehicle parts, maintenance and repairs",
+    "Other passenger vehicle operating expenses",
+    "Local and commuter transportation",
+    "Inter-city transportation",
+    "Health care goods",
+    "Health care services",
+    "Personal care supplies and equipment",
+    "Personal care services",
+    "Recreational equipment and services (excluding recreational vehicles)",
+    "Purchase of recreational vehicles and outboard motors",
+    "Operation of recreational vehicles",
+    "Home entertainment equipment, parts and services",
+    "Travel services",
+    "Other cultural and recreational services",
+    "Education",
+    "Reading material (excluding textbooks)",
+    "Alcoholic beverages served in licensed establishments",
+    "Alcoholic beverages purchased from stores",
+    "Tobacco products and smokers' supplies",
+]
+assert len(COMPOSANTES_55) == 55

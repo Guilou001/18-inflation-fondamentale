@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+message: "Pour citer ce dépôt, utilisez les métadonnées ci-dessous."
+title: "inflation-fondamentale : le concours rejoué à travers le choc, la recette refaite"
+authors:
+  - family-names: "Vaudescal"
+    given-names: "Guillaume"
+repository-code: "https://github.com/Guilou001/18-inflation-fondamentale"
+license: MIT
+date-released: "2026-08-29"
