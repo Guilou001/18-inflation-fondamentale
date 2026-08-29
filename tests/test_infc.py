@@ -21,9 +21,9 @@ def test_components_are_55_and_unique():
 
 
 def test_weighted_median_hand_case():
-    # cas frontière : cumuls 0,2 puis 0,5 puis 1,0 ; le 50e percentile appartient à la
-    # composante qui FERME exactement à 0,5 (percentile inférieur, convention déclarée)
-    assert weighted_median(np.array([1.0, 2.0, 3.0]), np.array([0.2, 0.3, 0.5])) == 2.0
+    # cas frontière : cumuls 0,2 puis 0,5 puis 1,0 ; le document officiel prend la
+    # PREMIÈRE composante dont le cumul DÉPASSE 50 % : la troisième
+    assert weighted_median(np.array([1.0, 2.0, 3.0]), np.array([0.2, 0.3, 0.5])) == 3.0
     # cas franc : cumuls 0,2 puis 0,4 puis 1,0 ; le 50e percentile tombe dans la troisième
     assert weighted_median(np.array([1.0, 2.0, 3.0]), np.array([0.2, 0.2, 0.6])) == 3.0
     # poids égaux, 5 composantes : la médiane est la valeur du milieu

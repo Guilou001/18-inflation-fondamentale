@@ -17,11 +17,14 @@ reconstruit IPC-tronq et IPC-méd depuis les 55 composantes, écart mesuré à l
 2. **Les 55 composantes suffisent à retrouver la forme ; les décimales exigent la
    cuisine officielle.** Notre reconstruction (tronquage à 20 % de poids par queue,
    médiane pondérée) colle à l'officiel à 0,24 point d'écart absolu moyen pour IPC-tronq
-   et 0,22 pour IPC-méd (corrélations 0,95 et 0,96 sur 439 mois), avec TROIS
+   et 0,22 pour IPC-méd (corrélations 0,95 et 0,96 sur 439 mois), avec QUATRE
    approximations déclarées : pas de correction des impôts indirects, STL au lieu du
-   X-13 officiel, panier de poids statique. L'écart maximal (1,7 point) tombe sur
-   1991, l'introduction de la TPS : l'omission déclarée se voit exactement là où la
-   théorie la met. (Mesuré.)
+   X-13 officiel, panier de poids statique, et 53 à 54 composantes avant décembre 1997
+   (les deux séries que la table A1 marque « partiellement construites par la Banque »
+   ne sont pas publiques ; effet borné par contrefactuel : environ 0,06 point là où il
+   s'applique). L'écart maximal (1,7 point) tombe sur 1991 et mêle les deux premières
+   causes : la TPS entre en vigueur (impôts indirects omis) au moment où le panier est
+   à 53 composantes. (Mesuré.)
 3. **Deux guichets, une seule vérité :** les mesures officielles publiées par StatCan
    (18-10-0256) et par Valet (BdC) coïncident exactement sur l'échantillon commun
    (contrôle croisé, `results/tables/controle_valet.csv`). (Mesuré.)
@@ -44,8 +47,15 @@ Rejouées à travers le choc, gagnent-elles encore leur propre concours ?
 | BdC Valet `CPI_TRIM, CPI_MEDIAN, CPI_COMMON` | le miroir des mêmes séries | mesuré |
 
 La liste des 55 composantes vient de la table A1 du document méthodologique officiel
-(programme 2301 de StatCan, rapporté), recopiée dans `components.py` : le chargeur ÉCHOUE
-si une composante manque, plutôt que de calculer sur un panier incomplet.
+(programme 2301 de StatCan, rapporté), recopiée dans `components.py` et vérifiée mot à
+mot par la contre-vérification. Le chargeur échoue si une COLONNE manque ; la couverture
+TEMPORELLE est une autre affaire : deux composantes (l'astérisque de la table A1 :
+« séries partiellement construites par la Banque du Canada ») n'existent dans la table
+publique qu'à partir de 1994-12 et 1997-12. Les mois à 53 ou 54 composantes sont
+acceptés, JOURNALISÉS (colonne `n_composantes` de `reconstruction.csv`) et comptés comme
+la quatrième approximation ; en deçà de 53, le calcul refuse. Détail d'exhaustivité
+déclaré : les 55 composantes de 2016 ne couvrent plus que 99,2 % du panier de 2025 (le
+cannabis récréatif est hors liste) ; les poids sont renormalisés.
 
 ## Volet 1 : le concours de Lao-Steyn, rejoué à travers le choc
 
@@ -84,10 +94,12 @@ retard à la montée COMME à la descente. Un filtre de tendance n'est pas un bo
 La méthode officielle (document 2301, rapporté) : 55 composantes, corrigées des impôts
 indirects, désaisonnalisées (44 sur 55, X-13), variations MENSUELLES, tronquage à 20 %
 de poids dans chaque queue ou médiane pondérée, poids au mois de raccord du panier.
-Notre reconstruction assume trois approximations, toutes déclarées : pas de correction
-des impôts indirects, STL robuste sur les 55, panier de poids statique (le plus récent).
-Les mathématiques du tronquage et de la médiane pondérée sont, elles, exactes et testées
-sur cas à la main (poids partiels aux bornes compris).
+Notre reconstruction assume quatre approximations, toutes déclarées : pas de correction
+des impôts indirects, STL robuste au lieu du X-13 officiel, panier de poids statique (le
+plus récent), et 53 à 54 composantes avant décembre 1997 (voir la section données). Les
+mathématiques du tronquage et de la médiane pondérée sont, elles, exactes et testées sur
+cas à la main, poids partiels aux bornes compris ; la médiane suit la lettre du document
+officiel (la première composante dont le poids cumulé DÉPASSE 50 %).
 
 ![Reconstruction](results/figures/reconstruction.png)
 
@@ -95,10 +107,12 @@ sur cas à la main (poids partiels aux bornes compris).
 pour IPC-tronq (haut) et IPC-méd (bas). La forme est retrouvée partout : corrélations de
 0,95 et 0,96, écarts absolus moyens de 0,24 et 0,22 point
 (`results/tables/ecarts_reconstruction.csv`). Les écarts se concentrent où les
-approximations mordent : autour de 1991 (la TPS entre en vigueur, et c'est la correction
-des impôts indirects que nous omettons, écart maximal de 1,7 point) et pendant le choc
-de 2021-23 pour la tronquée (0,48 point d'écart moyen, quand la désaisonnalisation et
-les poids comptent le plus). La décimale publiée exige la cuisine officielle, facteurs
+approximations mordent : autour de 1991 (écart maximal de 1,7 point, où se superposent
+la TPS, donc l'omission des impôts indirects, ET le panier réduit à 53 composantes
+d'avant 1994) et pendant le choc de 2021-23 pour la tronquée (0,48 point d'écart moyen,
+quand la désaisonnalisation et les poids comptent le plus). Le contrefactuel mesuré sur
+1998-2026, où les 55 existent : retirer les deux composantes tardives déplace le
+glissement de 0,06 point en moyenne (0,24 au pire), le quart environ de l'écart total. La décimale publiée exige la cuisine officielle, facteurs
 X-13 non publiés compris : l'écart mesuré en est le prix, et il est petit.
 
 ## Reproduire
@@ -110,20 +124,22 @@ uv run infc fetch    # 3 tables StatCan + Valet (~17 Mo)
 uv run infc lab      # reconstruction + concours : 6 tables, 3 figures (~3 min, STL sur 55 séries)
 ```
 
-Les tests, tous à la main : la médiane pondérée sur cas frontière (le 50e percentile
-appartient à la composante qui ferme exactement à 0,5, convention du percentile
-inférieur) et sur cas franc ; le tronquage avec poids partiels aux bornes ; le cas
+Les tests, tous à la main : la médiane pondérée sur cas frontière (la première
+composante dont le cumul DÉPASSE 50 %, la lettre du document officiel) et sur cas
+franc ; le tronquage avec poids partiels aux bornes ; le cas
 dégénéré toutes-composantes-égales ; la composition mensuelle vers le glissement annuel
 (1,003 puissance 12) ; la STL qui retire une saisonnalité plantée ; le concours qui
 préfère le vrai signal au bruit ; les 55 composantes uniques.
 
 ## Limites, avec statut
 
-1. **Trois approximations dans la reconstruction, chacune déclarée** : impôts indirects
-   non corrigés (l'écart de 1991 en est la signature, mesuré), STL au lieu de X-13 (les
-   facteurs officiels ne sont pas publiés), panier de poids statique au lieu des paniers
-   successifs au mois de raccord. L'écart de 0,22-0,24 point est leur prix total ; la
-   décomposition entre les trois n'est pas isolée. (Déclaré.)
+1. **Quatre approximations dans la reconstruction, chacune déclarée** : impôts indirects
+   non corrigés, STL au lieu du programme officiel de désaisonnalisation (facteurs non
+   publiés), panier de poids statique, et 53 à 54 composantes avant décembre 1997 (les
+   deux séries reconstruites par la Banque ne sont pas publiques ; effet contrefactuel
+   d'environ 0,06 point, mesuré sur 1998-2026 ; attrapée par la contre-vérification
+   adversariale, elle manquait à la première version). L'écart de 0,22-0,24 point est
+   leur prix total ; la décomposition complète n'est pas isolée. (Déclaré et mesuré.)
 2. **Le critère prédictif est en pleine période**, comme chez Lao-Steyn : c'est une
    comparaison de mesures, pas un exercice de prévision en temps réel ; une version
    récursive serait plus dure et la suite naturelle. (Déclaré.)
@@ -159,13 +175,15 @@ re-run the Lao-Steyn horse race THROUGH the shock: on the predictive criterion (
 ranks last of the three official measures in both windows (1.02, then 1.40): the
 demotion was already in the data. Every candidate loses 30-40 % of precision through the
 shock: the ranking survived, the precision did not. (2) We rebuild CPI-trim and
-CPI-median from the official 55-component list (Table A1, hard-coded, loader fails loudly
-if any component is missing): weighted 20 %-per-tail trim and weighted median, with
-three declared approximations (no indirect-tax adjustment, STL instead of the
-unpublished X-13 factors, static basket weights). Result: mean absolute gap of 0.24 pt
-(trim) and 0.22 pt (median) to the official series over 439 months, correlations
-0.95-0.96, with the largest gap exactly at the 1991 GST introduction, the signature of
-the declared tax-adjustment omission. StatCan and Bank of Canada (Valet) copies of the
+CPI-median from the official 55-component list (Table A1, hard-coded and verified word
+for word): weighted 20 %-per-tail trim and weighted median (official boundary
+convention), with FOUR declared approximations: no indirect-tax adjustment, STL instead
+of the unpublished official seasonal factors, static basket weights, and 53-54
+components before December 1997 (the two Bank-constructed series are not public;
+counterfactual effect ~0.06 pt where it applies, logged per month). Result: mean
+absolute gap of 0.24 pt (trim) and 0.22 pt (median) to the official series over 439
+months, correlations 0.95-0.96, with the largest gap at 1991 where the GST introduction
+and the reduced basket overlap. StatCan and Bank of Canada (Valet) copies of the
 official series match exactly (cross-checked). Free data, open licence, 9 hand-computed
 tests.
 

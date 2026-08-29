@@ -33,11 +33,16 @@ def seasonally_adjust(indices: pd.DataFrame) -> pd.DataFrame:
 
 
 def weighted_median(changes: np.ndarray, weights: np.ndarray) -> float:
-    """La variation au 50e percentile des poids, composantes triées par variation."""
+    """La variation de la PREMIÈRE composante dont le poids cumulé DÉPASSE 50 %.
+
+    C'est la lettre du document officiel (« the first component for which the cumulative
+    weight is greater than 50 per cent ») ; sur les données réelles, aucun mois ne tombe
+    sur la borne exacte (mesuré par la contre-vérification : 0 sur 462).
+    """
     order = np.argsort(changes)
     c, w = changes[order], weights[order]
     cum = np.cumsum(w) / w.sum()
-    return float(c[np.searchsorted(cum, 0.5)])
+    return float(c[np.searchsorted(cum, 0.5, side="right")])
 
 
 def trimmed_mean(changes: np.ndarray, weights: np.ndarray, trim: float = 0.20) -> float:
@@ -63,10 +68,15 @@ def monthly_measures(sa_indices: pd.DataFrame, weights: pd.Series) -> pd.DataFra
     for p, row in changes.iterrows():
         v = row.to_numpy(dtype=float)
         ok = np.isfinite(v)
-        if ok.sum() < 50:
+        # deux composantes (astérisque de la table A1, « partly constructed by the Bank
+        # of Canada ») manquent des données publiques avant 1994-12 et 1997-12 : les mois
+        # à 53 ou 54 composantes sont acceptés, JOURNALISÉS, et déclarés au README ;
+        # en deçà de 53, on refuse de calculer
+        if ok.sum() < 53:
             continue
         rows[p] = {"tronq_mm": trimmed_mean(v[ok], w[ok]),
-                   "med_mm": weighted_median(v[ok], w[ok])}
+                   "med_mm": weighted_median(v[ok], w[ok]),
+                   "n_composantes": int(ok.sum())}
     mm = pd.DataFrame.from_dict(rows, orient="index").sort_index()
     for c in ("tronq", "med"):
         idx = (1.0 + mm[f"{c}_mm"] / 100.0).cumprod()
