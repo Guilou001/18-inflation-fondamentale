@@ -9,11 +9,13 @@ reconstruit IPC-tronq et IPC-méd depuis les 55 composantes, écart mesuré à l
 ## En bref
 
 1. **Le podium d'avant 2019 survit au choc, et la relégation de la Banque était dans les
-   données.** Sur le critère prédictif (RMSE de l'IPC total à 12 mois) : IPC-tronq gagne
-   sur l'échantillon long (0,89 point) COMME sur 2016-2025 (1,18) ; l'IPC-comm, que la
-   Banque a déclassé en 2022, finit dernier des trois mesures officielles dans les deux
-   fenêtres (1,02 puis 1,40). Le choc n'a pas rebattu les cartes, il a juste rendu tout
-   le monde moins précis (+30 à +40 % de RMSE). (Mesuré.)
+   données.** Sur le critère d'ajustement à 12 mois : IPC-tronq gagne AVANT le choc
+   (0,77 point de pourcentage sur 1990-01 à 2015-12), sur l'échantillon complet (0,89) et
+   sur la fenêtre récente (1,15) ; l'IPC-comm, que la Banque a déclassé en 2022, finit
+   dernier des trois mesures officielles dans les trois fenêtres (0,85, puis 1,01, puis
+   1,33). Le choc n'a pas rebattu les cartes, il a juste rendu tout le monde moins précis
+   (+48 % d'erreur pour l'IPC-tronq entre la fenêtre d'avant et la fenêtre récente).
+   (Mesuré.)
 2. **Les 55 composantes suffisent à retrouver la forme ; les décimales exigent la
    cuisine officielle.** Notre reconstruction (tronquage à 20 % de poids par queue,
    médiane pondérée) colle à l'officiel à 0,24 point d'écart absolu moyen pour IPC-tronq
@@ -65,20 +67,22 @@ régression de l'inflation totale moyenne des 12 et 24 prochains mois sur la mes
 courante, pleine période comme chez Lao-Steyn, déclaré). Candidates : les trois mesures
 officielles, l'IPC hors alimentation et énergie, la moyenne mobile de 12 mois.
 
-| RMSE à 12 mois (pt) | Échantillon long (1990-) | 2016-2025 |
+| Erreur d'ajustement à 12 mois (pp) | Avant le choc (1990-01 à 2015-12) | Échantillon complet (1990-01 à 2026-07) | Fenêtre récente (2016-01 à 2026-07) |
 |---|---|---|
-| **IPC-tronq** | **0,89** | **1,18** |
-| IPC-méd | 0,95 | 1,29 |
-| IPC-comm | 1,02 | 1,40 |
-| Hors alimentation-énergie | 1,01 | 1,36 |
-| Moyenne mobile 12 mois | 1,10 | 1,52 |
+| **IPC-tronq** | **0,77** | **0,89** | **1,15** |
+| IPC-méd | 0,80 | 0,94 | 1,24 |
+| IPC-comm | 0,85 | 1,01 | 1,33 |
+| IPC hors aliments et énergie | 0,82 | 1,00 | 1,31 |
+| Moyenne mobile 12 mois | 0,88 | 1,09 | 1,45 |
 
 **Lecture guidée.** Trois enseignements mesurés. L'IPC-tronq garde son premier rang dans
-les deux fenêtres : le choix de 2016 tient. L'IPC-comm est dernier des mesures
-officielles partout, et la Banque l'a rétrogradé en 2022 après ses grandes révisions :
-sa relégation se lisait déjà dans le critère prédictif. Et TOUTES les mesures perdent 30
-à 40 % de précision sur 2016-2025 : le choc n'a pas changé le classement, il a coûté à
-tout le monde. Sur le lissage, l'IPC-méd est la plus stable (0,13 d'écart-type de
+les trois fenêtres, y compris dans celle qui s'arrête AVANT le choc : le choix de 2016
+tient, et la comparaison est cette fois entre deux périodes disjointes et non entre un
+échantillon et l'une de ses sous-périodes. L'IPC-comm est dernier des mesures officielles
+partout, et la Banque l'a rétrogradé en 2022 après ses grandes révisions : sa relégation
+se lisait déjà dans le critère. Et TOUTES les mesures perdent de 48 à 65 % de précision
+entre la fenêtre d'avant et la fenêtre récente : le choc n'a pas changé le classement, il
+a coûté à tout le monde. Sur le lissage, l'IPC-méd est la plus stable (0,13 d'écart-type de
 variation mensuelle) et l'IPC hors alimentation-énergie la plus bruyante (0,30) : le
 filtre « fixe » exclut toujours les mêmes postes, même quand le choc vient d'ailleurs.
 
@@ -86,8 +90,11 @@ filtre « fixe » exclut toujours les mêmes postes, même quand le choc vient d
 
 **Comment lire cette figure.** L'IPC total (gris) et les trois mesures officielles,
 bande grise sur la fourchette cible de 1 à 3 %. En 2021-23, les mesures fondamentales
-montent à 5-6 % : elles ont filtré le sommet de 8 % mais suivi le gros du choc, avec
-retard à la montée COMME à la descente. Un filtre de tendance n'est pas un bouclier.
+montent à 5-6 % : elles ont filtré le sommet de 8,1 % mais suivi le gros du choc. Le
+retard n'est pas le même pour les trois, et c'est mesuré : l'IPC-tronq culmine LE MÊME
+MOIS que l'IPC total, en 2022-06 ; l'IPC-méd retarde de quatre mois et l'IPC-comm de
+cinq. Un filtre de tendance n'est pas un bouclier, mais celui que la Banque a retenu ne
+retarde pas.
 
 ## Volet 2 : la recette refaite, et ce que l'écart enseigne
 
@@ -112,7 +119,9 @@ la TPS, donc l'omission des impôts indirects, ET le panier réduit à 53 compos
 d'avant 1994) et pendant le choc de 2021-23 pour la tronquée (0,48 point d'écart moyen,
 quand la désaisonnalisation et les poids comptent le plus). Le contrefactuel mesuré sur
 1998-2026, où les 55 existent : retirer les deux composantes tardives déplace le
-glissement de 0,06 point en moyenne (0,24 au pire), le quart environ de l'écart total. La décimale publiée exige la cuisine officielle, facteurs
+glissement de 0,056 point de pourcentage en moyenne pour la tronquée et 0,062 pour la
+médiane, avec un maximum de 0,22 en 2022-04, sur 343 mois de 1998-01 à 2026-07 (mesuré,
+`results/tables/contrefactuel_composantes.csv`) : le quart environ de l'écart total. La décimale publiée exige la cuisine officielle, facteurs
 X-13 non publiés compris : l'écart mesuré en est le prix, et il est petit.
 
 ## Reproduire
@@ -171,7 +180,8 @@ The Bank of Canada's three preferred core inflation measures won their 2016 sele
 pre-2019 data; 2021-23 delivered exactly the regime they were built to filter. (1) We
 re-run the Lao-Steyn horse race THROUGH the shock: on the predictive criterion (RMSE for
 12-month-ahead headline CPI), CPI-trim wins on the long sample (0.89 pt) AND on
-2016-2025 (1.18); CPI-common, which the Bank demoted in 2022 after large revisions,
+the recent window (1.15) and, crucially, on a window that STOPS BEFORE the shock (0.77);
+CPI-common, which the Bank demoted in 2022 after large revisions,
 ranks last of the three official measures in both windows (1.02, then 1.40): the
 demotion was already in the data. Every candidate loses 30-40 % of precision through the
 shock: the ranking survived, the precision did not. (2) We rebuild CPI-trim and

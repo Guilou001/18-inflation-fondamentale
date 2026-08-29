@@ -1,0 +1,6 @@
+candidate,biais,volatilite,rmse_h12,n_h12,rmse_h24,n_h24
+IPC-tronq,-0.188,0.14,0.773,312,0.564,312
+IPC-méd,-0.118,0.123,0.799,312,0.587,312
+IPC-comm,-0.119,0.157,0.846,312,0.562,312
+IPC hors aliments et énergie,-0.206,0.308,0.82,312,0.6,312
+moyenne mobile 12 mois,0.07,0.133,0.88,312,0.63,312
