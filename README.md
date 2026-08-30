@@ -6,6 +6,8 @@ devaient filtrer. Ce dépôt rejoue le concours de Lao et Steyn à travers le ch
 reconstruit IPC-tronq et IPC-méd depuis les 55 composantes, écart mesuré à l'officiel.
 *English summary below.*
 
+Le même contenu en PDF : [rapport/rapport.pdf](rapport/rapport.pdf).
+
 ## En bref
 
 1. **Le podium d'avant 2019 survit au choc, et la relégation de la Banque était dans les

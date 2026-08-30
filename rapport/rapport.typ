@@ -39,6 +39,8 @@
 
 Les trois mesures d'inflation fondamentale de la Banque du Canada ont gagné leur place sur des données d'avant 2019 ; le choc de 2021-23 est exactement le régime qu'elles devaient filtrer. Ce dépôt rejoue le concours de Lao et Steyn à travers le choc, et reconstruit IPC-tronq et IPC-méd depuis les 55 composantes, écart mesuré à l'officiel. _English summary below._
 
+Le même contenu en PDF : #link("rapport/rapport.pdf")[rapport/rapport.pdf].
+
 == En bref
 
 + *Le podium d'avant 2019 survit au choc, et la relégation de la Banque était dans les données.* Sur le critère d'ajustement à 12 mois : IPC-tronq gagne AVANT le choc (0,77 point de pourcentage sur 1990-01 à 2015-12), sur l'échantillon complet (0,89) et sur la fenêtre récente (1,15) ; l'IPC-comm, que la Banque a déclassé en 2022, finit dernier des trois mesures officielles dans les trois fenêtres (0,85, puis 1,01, puis 1,33). Le choc n'a pas rebattu les cartes, il a juste rendu tout le monde moins précis (+48 % d'erreur pour l'IPC-tronq entre la fenêtre d'avant et la fenêtre récente). (Mesuré.)
