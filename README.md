@@ -1,14 +1,24 @@
-# L'inflation fondamentale à l'épreuve du choc : le concours rejoué, la recette refaite
+# Les mesures d'inflation fondamentale ont-elles résisté au choc de 2021 ?
 
-Les trois mesures d'inflation fondamentale de la Banque du Canada ont gagné leur place
-sur des données d'avant 2019 ; le choc de 2021-23 est exactement le régime qu'elles
-devaient filtrer. Ce dépôt rejoue le concours de Lao et Steyn à travers le choc, et
-reconstruit IPC-tronq et IPC-méd depuis les 55 composantes, écart mesuré à l'officiel.
+L'inflation totale peut monter à cause de quelques prix très instables, même lorsque la hausse générale reste plus modérée. La Banque du Canada publie donc des mesures qui retirent ou réduisent l'influence des mouvements extrêmes. Le choc de 2021 à 2023 permet de vérifier si ces mesures ont continué de décrire la tendance commune des prix.
+
+Le présent projet reprend le concours statistique de Lao et Steyn, puis reconstruit deux mesures à partir de 55 composantes de l'indice des prix. Cette seconde étape permet de distinguer les règles publiques des ajustements que seule la Banque applique.
+
+**Résultat principal.** La mesure tronquée garde le premier rang avant le choc, sur l'échantillon complet et dans la période récente. Son erreur à douze mois passe toutefois de 0,77 à 1,15 point de pourcentage, soit une hausse de 48 %. La mesure commune, déclassée par la Banque en 2022, termine dernière dans les trois périodes. De plus, les reconstructions suivent les séries officielles avec des corrélations de 0,95 et 0,96, mais leur écart moyen reste voisin de 0,23 point.
+
+Afin de comprendre ces résultats, nous présenterons d'abord le problème que chaque mesure cherche à résoudre. Dans un deuxième temps, nous expliquerons les critères du concours et les périodes comparées. Ensuite, nous reconstruirons les deux séries composante par composante et nous mesurerons leurs écarts. Enfin, nous étudierons les causes connues de ces écarts, les limites et les commandes de reproduction.
+
+Le même contenu en PDF : [rapport/rapport.pdf](rapport/rapport.pdf).
+
+<details>
+<summary>Résumé en anglais</summary>
+
 *English summary below.*
 
 Le même contenu en PDF : [rapport/rapport.pdf](rapport/rapport.pdf).
 
-## En bref
+</details>
+## Les résultats en détail
 
 1. **Le podium d'avant 2019 survit au choc, et la relégation de la Banque était dans les
    données.** Sur le critère d'ajustement à 12 mois : IPC-tronq gagne AVANT le choc

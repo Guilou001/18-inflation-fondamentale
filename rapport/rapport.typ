@@ -1,4 +1,4 @@
-#set document(title: "L'inflation fondamentale à l'épreuve du choc : le concours rejoué, la recette refaite", author: "Guillaume Vaudescal")
+#set document(title: "Les mesures d'inflation fondamentale ont-elles résisté au choc de 2021 ?", author: "Guillaume Vaudescal")
 #set page(
   paper: "a4",
   margin: (x: 2.2cm, y: 2.4cm),
@@ -30,20 +30,32 @@
 
 #align(center)[
   #block(width: 100%)[
-    #text(size: 18pt, weight: "bold")[L'inflation fondamentale à l'épreuve du choc : le concours rejoué, la recette refaite]
+    #text(size: 18pt, weight: "bold")[Les mesures d'inflation fondamentale ont-elles résisté au choc de 2021 ?]
     #v(0.6em)
-    #text(size: 10pt, fill: luma(70))[Guillaume Vaudescal · 2026-08-30 · #link("https://github.com/Guilou001/18-inflation-fondamentale")[Guilou001/18-inflation-fondamentale]]
+    #text(size: 10pt, fill: luma(70))[Guillaume Vaudescal · 2026-09-04 · #link("https://github.com/Guilou001/18-inflation-fondamentale")[Guilou001/18-inflation-fondamentale]]
   ]
 ]
 #v(1.2em)
 #line(length: 100%, stroke: 0.6pt + luma(190))
 #v(0.8em)
 
-Les trois mesures d'inflation fondamentale de la Banque du Canada ont gagné leur place sur des données d'avant 2019 ; le choc de 2021-23 est exactement le régime qu'elles devaient filtrer. Ce dépôt rejoue le concours de Lao et Steyn à travers le choc, et reconstruit IPC-tronq et IPC-méd depuis les 55 composantes, écart mesuré à l'officiel. _English summary below._
+L'inflation totale peut monter à cause de quelques prix très instables, même lorsque la hausse générale reste plus modérée. La Banque du Canada publie donc des mesures qui retirent ou réduisent l'influence des mouvements extrêmes. Le choc de 2021 à 2023 permet de vérifier si ces mesures ont continué de décrire la tendance commune des prix.
+
+Le présent projet reprend le concours statistique de Lao et Steyn, puis reconstruit deux mesures à partir de 55 composantes de l'indice des prix. Cette seconde étape permet de distinguer les règles publiques des ajustements que seule la Banque applique.
+
+*Résultat principal.* La mesure tronquée garde le premier rang avant le choc, sur l'échantillon complet et dans la période récente. Son erreur à douze mois passe toutefois de 0,77 à 1,15 point de pourcentage, soit une hausse de 48 %. La mesure commune, déclassée par la Banque en 2022, termine dernière dans les trois périodes. De plus, les reconstructions suivent les séries officielles avec des corrélations de 0,95 et 0,96, mais leur écart moyen reste voisin de 0,23 point.
+
+Afin de comprendre ces résultats, nous présenterons d'abord le problème que chaque mesure cherche à résoudre. Dans un deuxième temps, nous expliquerons les critères du concours et les périodes comparées. Ensuite, nous reconstruirons les deux séries composante par composante et nous mesurerons leurs écarts. Enfin, nous étudierons les causes connues de ces écarts, les limites et les commandes de reproduction.
 
 Le même contenu en PDF : #link("rapport/rapport.pdf")[rapport/rapport.pdf].
 
-== En bref
+== Résumé en anglais
+
+_English summary below._
+
+Le même contenu en PDF : #link("rapport/rapport.pdf")[rapport/rapport.pdf].
+
+== Les résultats en détail
 
 + *Le podium d'avant 2019 survit au choc, et la relégation de la Banque était dans les données.* Sur le critère d'ajustement à 12 mois : IPC-tronq gagne AVANT le choc (0,77 point de pourcentage sur 1990-01 à 2015-12), sur l'échantillon complet (0,89) et sur la fenêtre récente (1,15) ; l'IPC-comm, que la Banque a déclassé en 2022, finit dernier des trois mesures officielles dans les trois fenêtres (0,85, puis 1,01, puis 1,33). Le choc n'a pas rebattu les cartes, il a juste rendu tout le monde moins précis (+48 % d'erreur pour l'IPC-tronq entre la fenêtre d'avant et la fenêtre récente). (Mesuré.)
 + *Les 55 composantes suffisent à retrouver la forme ; les décimales exigent la cuisine officielle.* Notre reconstruction (tronquage à 20 % de poids par queue, médiane pondérée) colle à l'officiel à 0,24 point d'écart absolu moyen pour IPC-tronq et 0,22 pour IPC-méd (corrélations 0,95 et 0,96 sur 439 mois), avec QUATRE approximations déclarées : pas de correction des impôts indirects, STL au lieu du X-13 officiel, panier de poids statique, et 53 à 54 composantes avant décembre 1997 (les deux séries que la table A1 marque « partiellement construites par la Banque » ne sont pas publiques ; effet borné par contrefactuel : environ 0,06 point là où il s'applique). L'écart maximal (1,7 point) tombe sur 1991 et mêle les deux premières causes : la TPS entre en vigueur (impôts indirects omis) au moment où le panier est à 53 composantes. (Mesuré.)
